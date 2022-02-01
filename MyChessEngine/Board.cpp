@@ -115,6 +115,29 @@ bool Board::checkLegalMoves(squares start, squares end, c_piece piece)
 			else if ((start >= A7 && start <= H7) && end == start - 20)
 				return true;
 			break;
+		
+		case WN:
+		case BN:
+			std::vector<int> dirs{ NNW, NNE, NEE, NWW, SSW, SSE, SEE, SWW };
+
+			for (int dir : dirs)
+			{
+				if (start + dir == end)
+					return true;
+			}
+		
+		case WB:
+		case BB:
+			int index = end - start;
+			if (index % 11 == 0 || index % 9 == 0)
+				return true;
+
+		case WR:
+		case BR:
+			int index = end - start;
+			if (index % 10 == 0 || abs(index) < 7)
+				return true;
+		
 	}
 			
 	return false;
