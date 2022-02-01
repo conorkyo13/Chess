@@ -91,21 +91,46 @@ void Board::printBoard()
 
 		std::cout << std::endl;
 	}
+
+	std::cout << std::endl;
 }
 
-bool Board::checkPLegalMoves(int start, int end, c_piece piece)
+bool Board::checkLegalMoves(squares start, squares end, c_piece piece)
 {
+
+	if (m_board[end] != EM)
+		return false;
+
 	switch (piece)
 	{
 		case WP:
-			if (end = start + 10)
+			if (end == start + 10)
+				return true;
+			else if ((start >= A2 && start <= H2) && end == start + 20)
 				return true;
 			break;
 		case BP:
-			if (end = start - 10)
+			if ( end == start - 10 )
+				return true;
+			else if ((start >= A7 && start <= H7) && end == start - 20)
 				return true;
 			break;
 	}
 			
 	return false;
+}
+
+void Board::move(squares start, squares end, c_piece piece)
+{
+	if (checkLegalMoves(start, end, piece))
+	{
+		c_piece temp = m_board[start];
+		m_board[start] = m_board[end];
+		m_board[end] = temp;
+	}
+	else
+	{
+		std::cout << "You cannot move there!" << std::endl << std::endl;
+	}
+	
 }

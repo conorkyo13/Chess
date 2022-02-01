@@ -4,10 +4,12 @@
 
 class CMove
 {
+	friend class Board;
+
 public:
 	CMove() {};
 
-	void Move(int startpos, int endpos, c_piece piece);
+	void lMove(squares startpos, squares endpos, c_piece piece);
 
 };
 
